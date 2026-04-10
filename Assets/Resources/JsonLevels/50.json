@@ -1,0 +1,180 @@
+{
+  "Index": 50,
+  "Difficulty": "0",
+  "TimeLimit": 60,
+  "Cells": [
+    {
+      "Index": {
+        "x": 0,
+        "y": 3
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 2
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 0
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 3
+      },
+      "Cat": {
+        "Color": 1,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 2
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 0
+      },
+      "Cat": {
+        "Color": 1,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 3
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 2
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 0
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 3
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 2
+      },
+      "Cat": {
+        "Color": 8,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 1
+      },
+      "Cat": {
+        "Color": 8,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 0
+      },
+      "ColorPath": -1
+    }
+  ],
+  "Boxes": [
+    {
+      "Index": 1,
+      "Color": 1,
+      "Cells": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        }
+      ],
+      "Count": 2,
+      "Gimmicks": []
+    },
+    {
+      "Index": 2,
+      "Color": 8,
+      "Cells": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 2
+        }
+      ],
+      "Count": 2,
+      "Gimmicks": []
+    }
+  ],
+  "Groups": [
+    {
+      "Indexes": [
+        1,
+        2
+      ]
+    }
+  ],
+  "Scratchers": [],
+  "Ropes": [],
+  "Barricades": null
+}

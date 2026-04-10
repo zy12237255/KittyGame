@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd032d25a8be41dc9d569c31e48f455, type: 3}
+  m_Name: ColorConfig
+  m_EditorClassIdentifier: 
+  colorElements:
+  - index: 0
+    color: {r: 0.28627452, g: 0.30588236, b: 0.5254902, a: 1}
+    catSprite: {fileID: 21300000, guid: 50acf01a9fe03427183d1fbe1b3ab310, type: 3}
+  - index: 1
+    color: {r: 0.1882353, g: 0.22745098, b: 0.20392157, a: 1}
+    catSprite: {fileID: 21300000, guid: dff54a1de223443c9a2a079c8a9592af, type: 3}
+  - index: 2
+    color: {r: 0.57254905, g: 0.77254903, b: 0.23529412, a: 1}
+    catSprite: {fileID: 21300000, guid: 988240b873e4542f1a83108576687344, type: 3}
+  - index: 3
+    color: {r: 0.8784314, g: 0.54509807, b: 0.21176471, a: 1}
+    catSprite: {fileID: 21300000, guid: 92cac8a381e8242f5a384a2763996767, type: 3}
+  - index: 4
+    color: {r: 0.9372549, g: 0.5764706, b: 0.57254905, a: 1}
+    catSprite: {fileID: 21300000, guid: 5b13ae58a6d5345deaa3d1f9c60b2e14, type: 3}
+  - index: 5
+    color: {r: 0.6666667, g: 0.47058824, b: 0.7137255, a: 1}
+    catSprite: {fileID: 21300000, guid: fee7477e41ae244ff90b9b95fa7f3d39, type: 3}
+  - index: 6
+    color: {r: 0.5882353, g: 0.21176471, b: 0.26666668, a: 1}
+    catSprite: {fileID: 21300000, guid: f1b06e3ec39124a14b117cf6e931ae76, type: 3}
+  - index: 7
+    color: {r: 0.4, g: 0.6, b: 0.73333335, a: 1}
+    catSprite: {fileID: 21300000, guid: 46b15d01b4f554f94a07dd4eedcfb1de, type: 3}
+  - index: 8
+    color: {r: 0.8117647, g: 0.8980392, b: 0.9372549, a: 1}
+    catSprite: {fileID: 21300000, guid: f63861b304457403e8b3329c8841c734, type: 3}
+  - index: 9
+    color: {r: 0.9529412, g: 0.78039217, b: 0.21960784, a: 1}
+    catSprite: {fileID: 21300000, guid: 8108b46fc274e44d58f4494c8710b7dc, type: 3}

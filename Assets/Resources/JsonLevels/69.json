@@ -1,0 +1,530 @@
+{
+  "Index": 69,
+  "Difficulty": "0",
+  "TimeLimit": 60,
+  "Cells": [
+    {
+      "Index": {
+        "x": 5,
+        "y": 6
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 5,
+        "y": 5
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 5,
+        "y": 4
+      },
+      "Cat": {
+        "Color": 2,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 5,
+        "y": 3
+      },
+      "Cat": {
+        "Color": 5,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 5,
+        "y": 2
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 5,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 5,
+        "y": 0
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 7
+      },
+      "Block": {
+        "Type": 1,
+        "Direction": 2,
+        "Cats": [
+          {
+            "Color": 7,
+            "Gimmicks": []
+          },
+          {
+            "Color": 7,
+            "Gimmicks": []
+          },
+          {
+            "Color": 7,
+            "Gimmicks": []
+          },
+          {
+            "Color": 2,
+            "Gimmicks": []
+          },
+          {
+            "Color": 6,
+            "Gimmicks": []
+          },
+          {
+            "Color": 5,
+            "Gimmicks": []
+          },
+          {
+            "Color": 5,
+            "Gimmicks": []
+          }
+        ]
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 6
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 5
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 4
+      },
+      "Cat": {
+        "Color": 2,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 3
+      },
+      "Cat": {
+        "Color": 6,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 2
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 4,
+        "y": 0
+      },
+      "Cat": {
+        "Color": 7,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 6
+      },
+      "Cat": {
+        "Color": 6,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 5
+      },
+      "Cat": {
+        "Color": 2,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 4
+      },
+      "Cat": {
+        "Color": 9,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 3
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 2
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 3,
+        "y": 0
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 5
+      },
+      "Cat": {
+        "Color": 9,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 4
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 3
+      },
+      "Cat": {
+        "Color": 9,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 2
+      },
+      "Cat": {
+        "Color": 8,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 2,
+        "y": 0
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 5
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 4
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 3
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 2
+      },
+      "Cat": {
+        "Color": 8,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 1,
+        "y": 0
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 5
+      },
+      "Cat": {
+        "Color": 8,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 4
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 3
+      },
+      "Cat": {
+        "Color": 9,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 2
+      },
+      "Cat": {
+        "Color": 9,
+        "Gimmicks": []
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 1
+      },
+      "ColorPath": -1
+    },
+    {
+      "Index": {
+        "x": 0,
+        "y": 0
+      },
+      "ColorPath": -1
+    }
+  ],
+  "Boxes": [
+    {
+      "Index": 1,
+      "Color": 5,
+      "Cells": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "Count": 3,
+      "Gimmicks": []
+    },
+    {
+      "Index": 2,
+      "Color": 6,
+      "Cells": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        }
+      ],
+      "Count": 3,
+      "Gimmicks": []
+    },
+    {
+      "Index": 3,
+      "Color": 7,
+      "Cells": [
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        }
+      ],
+      "Count": 4,
+      "Gimmicks": []
+    },
+    {
+      "Index": 4,
+      "Color": 8,
+      "Cells": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "Count": 3,
+      "Gimmicks": []
+    },
+    {
+      "Index": 5,
+      "Color": 9,
+      "Cells": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 5
+        }
+      ],
+      "Count": 5,
+      "Gimmicks": []
+    },
+    {
+      "Index": 6,
+      "Color": 2,
+      "Cells": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 6
+        }
+      ],
+      "Count": 4,
+      "Gimmicks": []
+    }
+  ],
+  "Groups": [
+    {
+      "Indexes": [
+        3,
+        4
+      ]
+    }
+  ],
+  "Scratchers": [],
+  "Ropes": [],
+  "Barricades": []
+}
