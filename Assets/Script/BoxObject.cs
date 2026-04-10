@@ -5,6 +5,7 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
 
+// Logical root for a movable/consumable box target.
 /// <summary>
 /// Box type enum based on block sprites
 /// </summary>

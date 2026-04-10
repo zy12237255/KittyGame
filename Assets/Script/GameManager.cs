@@ -231,12 +231,7 @@ public class GameManager : MonoBehaviour
             if (uiManager?.UiGame != null)
                 uiManager.UiGame.PauseTimer();
         }
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
+        SetStatusUIVisible(true, true);
         if (uiManager?.UiMoreBooster != null)
             uiManager.UiMoreBooster.Show(type);
     }
@@ -252,11 +247,7 @@ public class GameManager : MonoBehaviour
             if (uiManager?.UiGame != null)
                 uiManager.UiGame.ResumeTimer();
         }
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(false);
-            uiManager.StatusUI.Hide();
-        }
+        SetStatusUIVisible(false);
     }
 
     /// <summary>
@@ -276,12 +267,7 @@ public class GameManager : MonoBehaviour
         currentState = GameState.HOME;
         uiManager.UiHome.Init();
         uiManager.UiHome.Show();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
+        SetStatusUIVisible(true, true);
         uiManager.UiHome.OnSettingClicked += HandleSettingClicked;
     }
 
@@ -289,6 +275,27 @@ public class GameManager : MonoBehaviour
     {
         if (uiManager?.UiSetting != null)
             uiManager.UiSetting.Show(UISetting.SettingMode.Setting);
+    }
+
+    private void SetStatusUIVisible(bool visible, bool refresh = false)
+    {
+        if (uiManager?.StatusUI == null)
+            return;
+        uiManager.StatusUI.gameObject.SetActive(visible);
+        if (refresh)
+            uiManager.StatusUI.RefreshFromGameData();
+        if (visible)
+            uiManager.StatusUI.Show();
+        else
+            uiManager.StatusUI.Hide();
+    }
+
+    private void ReturnHomeUI()
+    {
+        if (uiManager?.UiHome == null)
+            return;
+        uiManager.UiHome.Init();
+        uiManager.UiHome.Show();
     }
 
     /// <summary>
@@ -316,11 +323,7 @@ public class GameManager : MonoBehaviour
         currentState = GameState.PLAYING;
         if (uiManager?.UiHome != null)
             uiManager.UiHome.Hide();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(false);
-            uiManager.StatusUI.Hide();
-        }
+        SetStatusUIVisible(false);
 
         if (uiManager?.UiGame != null)
         {
@@ -415,12 +418,7 @@ public class GameManager : MonoBehaviour
             uiManager.UiOutOfTime.gameObject.SetActive(true);
             uiManager.UiOutOfTime.Show();
         }
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
+        SetStatusUIVisible(true, true);
         SoundManager.Instance?.PlayLose();
         StartCoroutine(ShowInterstitialAfterDelay());
     }
@@ -458,17 +456,8 @@ public class GameManager : MonoBehaviour
         currentState = GameState.HOME;
         if (uiManager?.UiOutOfTime != null)
             uiManager.UiOutOfTime.Hide();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
-        if (uiManager?.UiHome != null)
-        {
-            uiManager.UiHome.Init();
-            uiManager.UiHome.Show();
-        }
+        SetStatusUIVisible(true, true);
+        ReturnHomeUI();
     }
 
     /// <summary>
@@ -493,17 +482,8 @@ public class GameManager : MonoBehaviour
             uiManager.UIFail.Hide();
         if (boardManager != null)
             boardManager.CleanBoard();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
-        if (uiManager?.UiHome != null)
-        {
-            uiManager.UiHome.Init();
-            uiManager.UiHome.Show();
-        }
+        SetStatusUIVisible(true, true);
+        ReturnHomeUI();
     }
 
     /// <summary>
@@ -546,17 +526,8 @@ public class GameManager : MonoBehaviour
         currentState = GameState.HOME;
         if (uiManager?.UiLostEnergy != null)
             uiManager.UiLostEnergy.Hide();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
-        if (uiManager?.UiHome != null)
-        {
-            uiManager.UiHome.Init();
-            uiManager.UiHome.Show();
-        }
+        SetStatusUIVisible(true, true);
+        ReturnHomeUI();
     }
 
     /// <summary>
@@ -570,11 +541,7 @@ public class GameManager : MonoBehaviour
             boardManager.StopFreeze();
         if (uiManager?.UiLostEnergy != null)
             uiManager.UiLostEnergy.Hide();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
+        SetStatusUIVisible(true, true);
         PlayGame();
     }
 
@@ -584,12 +551,7 @@ public class GameManager : MonoBehaviour
     public void OnRefillEnergyByAds()
     {
         AddEnergy(1);
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
+        SetStatusUIVisible(true, true);
     }
 
     /// <summary>
@@ -618,17 +580,8 @@ public class GameManager : MonoBehaviour
     public void OnRefillEnergyClose()
     {
         currentState = GameState.HOME;
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(true);
-            uiManager.StatusUI.RefreshFromGameData();
-            uiManager.StatusUI.Show();
-        }
-        if (uiManager?.UiHome != null)
-        {
-            uiManager.UiHome.Init();
-            uiManager.UiHome.Show();
-        }
+        SetStatusUIVisible(true, true);
+        ReturnHomeUI();
     }
 
     /// <summary>
@@ -713,11 +666,7 @@ public class GameManager : MonoBehaviour
         AddCoin(-OutOfTimeClaimCost);
         if (uiManager?.StatusUI != null)
             uiManager.StatusUI.UpdateCoinValueText();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(false);
-            uiManager.StatusUI.Hide();
-        }
+        SetStatusUIVisible(false);
         if (uiManager?.UiOutOfTime != null)
             uiManager.UiOutOfTime.Hide();
         if (uiManager?.UiGame != null)
@@ -760,11 +709,7 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance?.PlayWin();
             StartCoroutine(ShowInterstitialAfterDelay());
             if (uiManager.StatusUI != null)
-            {
-                uiManager.StatusUI.gameObject.SetActive(true);
-                uiManager.StatusUI.RefreshFromGameData();
-                uiManager.StatusUI.Show();
-            }
+                SetStatusUIVisible(true, true);
         }
     }
 
@@ -776,11 +721,7 @@ public class GameManager : MonoBehaviour
         currentState = GameState.PLAYING;
         if (uiManager?.UiWin != null)
             uiManager.UiWin.Hide();
-        if (uiManager?.StatusUI != null)
-        {
-            uiManager.StatusUI.gameObject.SetActive(false);
-            uiManager.StatusUI.Hide();
-        }
+        SetStatusUIVisible(false);
     }
 
     /// <summary>

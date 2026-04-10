@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// Popup shown when the player has no energy (e.g. tried to play without enough energy). Inherits from BasePopup.
-/// </summary>
 public class UILostEnergy : BasePopup
 {
     [Header("LostEnergy UI")]
@@ -40,16 +37,14 @@ public class UILostEnergy : BasePopup
     {
         SoundManager.Instance?.PlayButtonClick();
         Hide();
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnLostEnergyResume();
+        GameManager.Instance?.OnLostEnergyResume();
     }
 
     protected virtual void HandleReplayClicked()
     {
         SoundManager.Instance?.PlayButtonClick();
         Hide();
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnLostEnergyReplay();
+        GameManager.Instance?.OnLostEnergyReplay();
     }
 
     public virtual void SetTitle(string title)

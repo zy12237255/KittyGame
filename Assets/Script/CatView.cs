@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Runtime visual/controller component for one cat piece.
 public class CatView : MonoBehaviour
 {
     [Header("References")]

@@ -1,9 +1,7 @@
-/// <summary>
-/// Booster types used for level rewards and in-game boosters.
-/// </summary>
+// Runtime identifiers for shop / HUD booster slots (freeze, star, magnet).
 public enum BoosterType
 {
-    Freeze,
-    Star,
-    Magnet
+    Freeze = 0,
+    Star = 1,
+    Magnet = 2
 }

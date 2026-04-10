@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using GoogleMobileAds.Api;
 
+// Shop popup for acquiring additional boosters.
 /// <summary>
 /// Popup shown when player taps a booster button with count 0 (get more boosters).
 /// Show by type: Freeze, Star, Magnet. GetByCoins: -900 coins, +3 boosters (toast if not enough). GetByAds: +1 booster. Close: hide.

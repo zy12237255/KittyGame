@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -51,12 +49,4 @@ public class UIManager : MonoBehaviour
     /// <summary>Refill energy popup - shown when energy is 0 and player taps Play from Home.</summary>
     public RefillEnergyUI UiRefillEnergy => uiRefillEnergy;
     public ToastUI ToastUI => toastUI;
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
 }

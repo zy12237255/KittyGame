@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
 
 public abstract class BasePanel : MonoBehaviour
 {
@@ -13,51 +12,44 @@ public abstract class BasePanel : MonoBehaviour
     [SerializeField] protected CanvasGroup canvasGroup;
     [SerializeField] protected RectTransform rectTransform;
 
-
     protected virtual void Awake()
     {
-        // Initialize components
-        if (canvasGroup != null)
-        {
-            canvasGroup.alpha = 0.0f;
-        }
-        if (rectTransform != null)
-        {
-            rectTransform.localScale = Vector3.one;
-        }
+        PrimeCanvasForReveal();
+    }
 
+    private void PrimeCanvasForReveal()
+    {
+        if (canvasGroup != null)
+            canvasGroup.alpha = 0f;
+        if (rectTransform != null)
+            rectTransform.localScale = Vector3.one;
     }
 
     public virtual void Show()
     {
-
-        if (canvasGroup != null)
-        {
-            canvasGroup.alpha = 0.0f;
-            canvasGroup.blocksRaycasts = true;
-            canvasGroup.interactable = true;
-            canvasGroup.DOFade(1f, fadeDuration).SetEase(fadeEase);
-        }
+        if (canvasGroup == null)
+            return;
+        canvasGroup.alpha = 0f;
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.interactable = true;
+        canvasGroup.DOFade(1f, fadeDuration).SetEase(fadeEase);
     }
 
     public virtual void Hide()
     {
-
-        if (canvasGroup != null)
-        {
-            canvasGroup.alpha = 1.0f;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.interactable = false;
-            canvasGroup.DOFade(0f, fadeDuration).SetEase(fadeEase);
-        }
-        // Deactivate after animation
-        //DOVirtual.DelayedCall(scaleDuration, () => gameObject.SetActive(false));
+        if (canvasGroup == null)
+            return;
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.interactable = false;
+        canvasGroup.DOFade(0f, fadeDuration).SetEase(fadeEase);
     }
 
     protected virtual void OnDestroy()
     {
-        // Kill any ongoing tweens
-        DOTween.Kill(rectTransform);
-        DOTween.Kill(canvasGroup);
+        if (rectTransform != null)
+            DOTween.Kill(rectTransform);
+        if (canvasGroup != null)
+            DOTween.Kill(canvasGroup);
     }
 }

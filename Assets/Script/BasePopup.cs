@@ -11,29 +11,23 @@ public abstract class BasePopup : BasePanel
     protected override void Awake()
     {
         base.Awake();
-        
-        // Initialize popup state
         if (rectTransform != null)
-        {
             rectTransform.localScale = Vector3.zero;
-        }
     }
 
     public override void Show()
     {
         gameObject.SetActive(true);
-        
+
         if (canvasGroup != null)
         {
             canvasGroup.blocksRaycasts = true;
             canvasGroup.interactable = true;
             canvasGroup.DOFade(1f, popupDuration).SetEase(popupEase);
         }
-        
+
         if (rectTransform != null)
-        {
             rectTransform.DOScale(Vector3.one, popupScale).SetEase(popupEase);
-        }
     }
 
     public override void Hide()
@@ -46,16 +40,15 @@ public abstract class BasePopup : BasePanel
         }
 
         if (rectTransform != null)
-        {
             rectTransform.DOScale(Vector3.zero, popupScale).SetEase(Ease.Linear);
-        }
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        // Kill any ongoing tweens
-        DOTween.Kill(rectTransform);
-        DOTween.Kill(canvasGroup);
+        if (rectTransform != null)
+            DOTween.Kill(rectTransform);
+        if (canvasGroup != null)
+            DOTween.Kill(canvasGroup);
     }
-} 
+}

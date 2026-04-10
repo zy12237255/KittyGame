@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
+// Gate-style loading transition overlay.
 public class UILoadingScene : BasePanel
 {
     [Header("Gate References")]

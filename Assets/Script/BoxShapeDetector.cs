@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Pattern matcher that maps occupied cells to BoxType.
 /// <summary>
 /// Detects BoxType based on cell position patterns
 /// </summary>

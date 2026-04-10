@@ -2,10 +2,6 @@ using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Popup shown when energy is 0 and player taps Play from Home. Offers RefillAds (+1 energy),
-/// RefillCoins (-900 coins, +3 energy), and Close (hide and return to Home).
-/// </summary>
 public class RefillEnergyUI : BasePopup
 {
     [Header("Buttons")]
@@ -38,8 +34,7 @@ public class RefillEnergyUI : BasePopup
     protected virtual void HandleRefillCoinsClicked()
     {
         SoundManager.Instance?.PlayButtonClick();
-        if (GameManager.Instance == null) return;
-        if (GameManager.Instance.TryRefillEnergyByCoins())
+        if (GameManager.Instance != null && GameManager.Instance.TryRefillEnergyByCoins())
         {
             Hide();
         }
@@ -48,8 +43,7 @@ public class RefillEnergyUI : BasePopup
     protected virtual void HandleCloseClicked()
     {
         SoundManager.Instance?.PlayButtonClick();
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnRefillEnergyClose();
+        GameManager.Instance?.OnRefillEnergyClose();
         Hide();
     }
 

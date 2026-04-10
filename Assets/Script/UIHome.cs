@@ -25,9 +25,6 @@ public class UIHome : BasePanel
         BindButtons();
     }
 
-    /// <summary>
-    /// Initializes UI Home, updates levelText from currentLevel (called from GameManager).
-    /// </summary>
     public virtual void Init()
     {
         SetLevel();
@@ -46,8 +43,7 @@ public class UIHome : BasePanel
     {
         SoundManager.Instance?.PlayButtonClick();
         OnPlayClicked?.Invoke();
-        if (GameManager.Instance != null)
-            GameManager.Instance.TryPlayGame();
+        GameManager.Instance?.TryPlayGame();
     }
 
     protected virtual void HandleSettingClicked()
@@ -58,8 +54,9 @@ public class UIHome : BasePanel
 
     public virtual void SetLevel()
     {
-        if (levelValueText != null)
-            levelValueText.text = GameManager.Instance.CurrentLevel.ToString();
+        if (levelValueText == null || GameManager.Instance == null)
+            return;
+        levelValueText.text = GameManager.Instance.CurrentLevel;
     }
 
     public virtual void SetPlayText(string text)

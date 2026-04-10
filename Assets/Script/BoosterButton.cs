@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// Single booster slot state machine (locked/available/empty).
 /// <summary>
 /// Booster button: lock state by level (GameConfig unlock level); when unlocked: count > 0 show Number, count = 0 show Mask+Plus; click uses booster or shows MoreBooster.
 /// </summary>

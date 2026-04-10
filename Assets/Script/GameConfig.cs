@@ -1,10 +1,6 @@
 using UnityEngine;
 
-/// <summary>
-/// Config for initial values: coin, boosters, energy max.
-/// Create asset: Right-click in Project → Create → Config → Game Config.
-/// Place asset in Resources/Configs/GameConfig to load by code, or assign to GameManager.
-/// </summary>
+// Scriptable defaults: economy, booster stock, unlock gates, energy cadence, store links.
 [CreateAssetMenu(fileName = "GameConfig", menuName = "Config/Game Config")]
 public class GameConfig : ScriptableObject
 {
@@ -40,10 +36,6 @@ public class GameConfig : ScriptableObject
     [SerializeField]
     private string googlePlayPackageName = "";
 
-    public string SupportUrl => !string.IsNullOrEmpty(supportUrl) ? supportUrl : "https://your-website.com";
-    /// <summary>Bundle ID for Google Play rate link. Uses googlePlayPackageName if set, otherwise Application.identifier.</summary>
-    public string GooglePlayPackageName => !string.IsNullOrEmpty(googlePlayPackageName) ? googlePlayPackageName : Application.identifier;
-
     [Header("Energy")]
     [Tooltip("Initial energy max (max energy when starting the game).")]
     [SerializeField]
@@ -51,6 +43,10 @@ public class GameConfig : ScriptableObject
     [Tooltip("Time to refill 1 energy (seconds). e.g. 300 = 5 minutes. Shown as mm:ss countdown on StatusUI when energy < max.")]
     [SerializeField]
     private int energyRefillSeconds = 300;
+
+    public string SupportUrl => string.IsNullOrEmpty(supportUrl) ? "https://your-website.com" : supportUrl;
+
+    public string GooglePlayPackageName => string.IsNullOrEmpty(googlePlayPackageName) ? Application.identifier : googlePlayPackageName;
 
     public int InitialCoin => initialCoin;
     public int InitialBoosterFreeze => initialBoosterFreeze;

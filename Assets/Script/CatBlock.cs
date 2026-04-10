@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Cat block spawner/launcher with directional raycast behavior.
 /// <summary>
 /// Direction enum for CatBlock
 /// </summary>

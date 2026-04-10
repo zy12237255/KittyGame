@@ -4,6 +4,7 @@ using TMPro;
 using DG.Tweening;
 using GoogleMobileAds.Api;
 
+// Win panel flow: animate panel, grant rewards, then continue.
 public class UIWin : BasePanel
 {
     [Header("Background")]
@@ -51,7 +52,7 @@ public class UIWin : BasePanel
     private void ResetAnimationState()
     {
         if (groupTitle != null) groupTitle.localScale = Vector3.zero;
-        var rewardCg = rewardFrameCanvasGroup != null ? rewardFrameCanvasGroup : (rewatdFrame != null ? rewatdFrame.GetComponent<CanvasGroup>() : null);
+        CanvasGroup rewardCg = ResolveRewardFrameCanvasGroup();
         if (rewardCg != null) rewardCg.alpha = 0f;
         if (claimX2Btn != null) claimX2Btn.transform.localScale = Vector3.zero;
         if (continueBtn != null) continueBtn.transform.localScale = Vector3.zero;
@@ -68,7 +69,7 @@ public class UIWin : BasePanel
         if (groupTitle != null)
             _showSequence.Append(groupTitle.DOScale(Vector3.one, bounceDuration).SetEase(bounceEase));
 
-        var rewardCg = rewardFrameCanvasGroup != null ? rewardFrameCanvasGroup : (rewatdFrame != null ? rewatdFrame.GetComponent<CanvasGroup>() : null);
+        CanvasGroup rewardCg = ResolveRewardFrameCanvasGroup();
         if (rewardCg != null)
             _showSequence.Append(rewardCg.DOFade(1f, rewardFadeDuration).SetEase(fadeEase));
 
@@ -78,6 +79,15 @@ public class UIWin : BasePanel
             _showSequence.Append(continueBtn.transform.DOScale(Vector3.one, bounceDuration).SetEase(bounceEase));
 
         _showSequence.OnComplete(() => _showSequence = null);
+    }
+
+    private CanvasGroup ResolveRewardFrameCanvasGroup()
+    {
+        if (rewardFrameCanvasGroup != null)
+            return rewardFrameCanvasGroup;
+        if (rewatdFrame != null)
+            return rewatdFrame.GetComponent<CanvasGroup>();
+        return null;
     }
 
     private void KillShowSequence()
@@ -112,20 +122,11 @@ public class UIWin : BasePanel
     {
         SoundManager.Instance?.PlayButtonClick();
         SetButtonsInteractable(false);
-        if (GameManager.Instance == null) return;
+        GameManager gm = GameManager.Instance;
+        if (gm == null) return;
         if (_coinRewardAmount > 0)
             SoundManager.Instance?.PlayCoinSound();
-        StatusUI statusUI = GameManager.Instance.uiManager != null ? GameManager.Instance.uiManager.StatusUI : null;
-        if (statusUI != null)
-        {
-            statusUI.AddCoinWithEffect(_coinRewardAmount, OnCoinEffectComplete);
-        }
-        else
-        {
-            if (_coinRewardAmount > 0)
-                GameManager.Instance.AddCoin(_coinRewardAmount);
-            OnCoinEffectComplete();
-        }
+        GrantCoinsWithOptionalEffect(gm, _coinRewardAmount);
     }
 
     private void OnCoinEffectComplete()
@@ -133,8 +134,21 @@ public class UIWin : BasePanel
         Hide();
         if (GameManager.Instance?.uiManager?.StatusUI != null)
             GameManager.Instance.uiManager.StatusUI.Hide();
-        if (GameManager.Instance != null)
-            GameManager.Instance.PlayGame();
+        GameManager.Instance?.PlayGame();
+    }
+
+    private void GrantCoinsWithOptionalEffect(GameManager gm, int amount)
+    {
+        StatusUI statusUI = gm.uiManager != null ? gm.uiManager.StatusUI : null;
+        if (statusUI != null)
+        {
+            statusUI.AddCoinWithEffect(amount, OnCoinEffectComplete);
+            return;
+        }
+
+        if (amount > 0)
+            gm.AddCoin(amount);
+        OnCoinEffectComplete();
     }
 
     private void SetButtonsInteractable(bool interactable)
@@ -206,29 +220,17 @@ public class UIWin : BasePanel
     public void EarnReward(Reward reward)
     {
         if (GameManager.Instance != null)
-        {
-            if (GameManager.Instance != null)
-                ReceiveX2Coin();
-        }
+            ReceiveX2Coin();
     }
 
     private void ReceiveX2Coin()
     {
         SetButtonsInteractable(false);
-        if (GameManager.Instance == null) return;
+        GameManager gm = GameManager.Instance;
+        if (gm == null) return;
         int coinX2 = _coinRewardAmount * 2;
         if (coinX2 > 0)
             SoundManager.Instance?.PlayCoinSound();
-        StatusUI statusUI = GameManager.Instance.uiManager != null ? GameManager.Instance.uiManager.StatusUI : null;
-        if (statusUI != null)
-        {
-            statusUI.AddCoinWithEffect(coinX2, OnCoinEffectComplete);
-        }
-        else
-        {
-            if (coinX2 > 0)
-                GameManager.Instance.AddCoin(coinX2);
-            OnCoinEffectComplete();
-        }
+        GrantCoinsWithOptionalEffect(gm, coinX2);
     }
 }

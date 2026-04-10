@@ -1,14 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.SocialPlatforms;
 using GoogleMobileAds.Api;
 using System;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 using GoogleMobileAds.Common;
-using UnityEngine.Advertisements;
 /*
  * 
  * Document for Unity Ads : https://docs.unity.com/ads/ImplementingBasicAdsUnity.html
@@ -43,6 +38,8 @@ public class AdsControl : MonoBehaviour
     public RewardedAd rewardedAd;
     private RewardedInterstitialAd rewardedInterstitialAd;
     private bool isShowingAppOpenAd;
+    private const string KeyShowAdsCounter = "ShowAds";
+    private const string KeyRemoveAds = "removeAds";
 
     public static AdsControl Instance { get { return instance; } }
 
@@ -53,8 +50,6 @@ public class AdsControl : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -66,11 +61,6 @@ public class AdsControl : MonoBehaviour
         MobileAds.SetiOSAppPauseOnBackground(true);
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(HandleInitCompleteAction);
-
-    }
-
-    private void Update()
-    {
 
     }
 
@@ -566,18 +556,18 @@ public class AdsControl : MonoBehaviour
                 }
         */
 
-        int numberShow = PlayerPrefs.GetInt("ShowAds");
+        int numberShow = PlayerPrefs.GetInt(KeyShowAdsCounter);
 
         if (numberShow < 2)
         {
             numberShow++;
-            PlayerPrefs.SetInt("ShowAds", numberShow);
+            PlayerPrefs.SetInt(KeyShowAdsCounter, numberShow);
             return;
         }
         else
         {
             numberShow = 0;
-            PlayerPrefs.SetInt("ShowAds", numberShow);
+            PlayerPrefs.SetInt(KeyShowAdsCounter, numberShow);
 
 
             if (interstitialAd != null && interstitialAd.CanShowAd())
@@ -591,8 +581,7 @@ public class AdsControl : MonoBehaviour
 
     public void RemoveAds()
     {
-
-        PlayerPrefs.SetInt("removeAds", 1);
+        PlayerPrefs.SetInt(KeyRemoveAds, 1);
         //if banner is active and user bought remove ads the banner will automatically hide
         HideBannerAd();
         DestroyBannerAd();
@@ -601,17 +590,8 @@ public class AdsControl : MonoBehaviour
 
     public bool IsRemoveAds()
     {
-        if (!PlayerPrefs.HasKey("removeAds"))
-        {
+        if (!PlayerPrefs.HasKey(KeyRemoveAds))
             return false;
-        }
-        else
-        {
-            if (PlayerPrefs.GetInt("removeAds") == 1)
-            {
-                return true;
-            }
-        }
-        return false;
+        return PlayerPrefs.GetInt(KeyRemoveAds) == 1;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+// Individual cell piece of a box that attracts/matches cats.
 public class BoxPartObject : MonoBehaviour
 {
     [Header("References")]

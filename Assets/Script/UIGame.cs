@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
+// In-game HUD: timer, pause, booster inputs.
 public class UIGame : BasePanel
 {
     [Header("Top")]
@@ -40,30 +41,29 @@ public class UIGame : BasePanel
 
     protected virtual void BindButtons()
     {
-        if (pauseBtn != null)
-            pauseBtn.onClick.AddListener(HandlePauseClicked);
+        pauseBtn?.onClick.AddListener(HandlePauseClicked);
+        BindBooster(starBooster, () =>
+        {
+            OnStarBoosterClicked?.Invoke();
+            GameManager.Instance?.TriggerStarBooster();
+        });
+        BindBooster(freezeBooster, () =>
+        {
+            OnFreezeBoosterClicked?.Invoke();
+            GameManager.Instance?.TriggerFreeze();
+        });
+        BindBooster(magnetBooster, () =>
+        {
+            OnMagnetBoosterClicked?.Invoke();
+            GameManager.Instance?.TriggerMagnet();
+        });
+    }
 
-        if (starBooster != null)
-            starBooster.OnUseBooster += _ =>
-            {
-                OnStarBoosterClicked?.Invoke();
-                if (GameManager.Instance != null)
-                    GameManager.Instance.TriggerStarBooster();
-            };
-        if (freezeBooster != null)
-            freezeBooster.OnUseBooster += _ =>
-            {
-                OnFreezeBoosterClicked?.Invoke();
-                if (GameManager.Instance != null)
-                    GameManager.Instance.TriggerFreeze();
-            };
-        if (magnetBooster != null)
-            magnetBooster.OnUseBooster += _ =>
-            {
-                OnMagnetBoosterClicked?.Invoke();
-                if (GameManager.Instance != null)
-                    GameManager.Instance.TriggerMagnet();
-            };
+    private static void BindBooster(BoosterButton button, System.Action onUsed)
+    {
+        if (button == null)
+            return;
+        button.OnUseBooster += _ => onUsed?.Invoke();
     }
 
     protected virtual void HandlePauseClicked()
@@ -191,11 +191,16 @@ public class UIGame : BasePanel
             UpdateTimerDisplay();
             if (_remainingSeconds <= 0)
             {
-                _timerRunning = false;
-                OnOutOfTime?.Invoke();
+                TriggerOutOfTime();
                 yield break;
             }
         }
+    }
+
+    private void TriggerOutOfTime()
+    {
+        _timerRunning = false;
+        OnOutOfTime?.Invoke();
     }
 
     private void UpdateTimerDisplay()

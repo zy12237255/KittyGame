@@ -282,11 +282,7 @@ public class BoardManager : MonoBehaviour
                     continue;
                 }
 
-                CatView catView = catObj.GetComponent<CatView>();
-                if (catView == null)
-                {
-                    catView = catObj.GetComponentInChildren<CatView>();
-                }
+                CatView catView = GetCatViewFromObject(catObj);
 
                 if (catView != null && catView.CurrentColorID == colorIndex && !catView.InBlock)
                 {
@@ -363,8 +359,7 @@ public class BoardManager : MonoBehaviour
         foreach (GameObject catObj in cats.Values)
         {
             if (catObj == null) continue;
-            CatView catView = catObj.GetComponent<CatView>();
-            if (catView == null) catView = catObj.GetComponentInChildren<CatView>();
+            CatView catView = GetCatViewFromObject(catObj);
             if (catView != null && !catView.InBlock)
             {
                 catView.CatJumpToHoleByStar();
@@ -593,8 +588,7 @@ public class BoardManager : MonoBehaviour
         foreach (GameObject catObj in cats.Values)
         {
             if (catObj == null) continue;
-            CatView catView = catObj.GetComponent<CatView>();
-            if (catView == null) catView = catObj.GetComponentInChildren<CatView>();
+            CatView catView = GetCatViewFromObject(catObj);
             if (catView == null) continue;
             int colorId = catView.CurrentColorID;
             if (!catCountByColor.ContainsKey(colorId))
@@ -611,8 +605,7 @@ public class BoardManager : MonoBehaviour
                 foreach (GameObject catObj in block.spawnedCats)
                 {
                     if (catObj == null) continue;
-                    CatView catView = catObj.GetComponent<CatView>();
-                    if (catView == null) catView = catObj.GetComponentInChildren<CatView>();
+                    CatView catView = GetCatViewFromObject(catObj);
                     if (catView == null) continue;
                     int colorId = catView.CurrentColorID;
                     if (!catCountByColor.ContainsKey(colorId))
@@ -737,8 +730,7 @@ public class BoardManager : MonoBehaviour
         foreach (var kv in cats)
         {
             if (kv.Value == null) { catKeysToRemove.Add(kv.Key); continue; }
-            CatView catView = kv.Value.GetComponent<CatView>();
-            if (catView == null) catView = kv.Value.GetComponentInChildren<CatView>();
+            CatView catView = GetCatViewFromObject(kv.Value);
             if (catView != null && invalid.Contains(catView.CurrentColorID))
             {
                 catKeysToRemove.Add(kv.Key);
@@ -759,8 +751,7 @@ public class BoardManager : MonoBehaviour
                 foreach (GameObject catObj in block.spawnedCats)
                 {
                     if (catObj == null) { toRemove.Add(catObj); continue; }
-                    CatView catView = catObj.GetComponent<CatView>();
-                    if (catView == null) catView = catObj.GetComponentInChildren<CatView>();
+                    CatView catView = GetCatViewFromObject(catObj);
                     if (catView != null && invalid.Contains(catView.CurrentColorID))
                         toRemove.Add(catObj);
                 }
@@ -1401,11 +1392,7 @@ public class BoardManager : MonoBehaviour
         {
             if (catObj != null)
             {
-                CatView catView = catObj.GetComponent<CatView>();
-                if (catView == null)
-                {
-                    catView = catObj.GetComponentInChildren<CatView>();
-                }
+                CatView catView = GetCatViewFromObject(catObj);
                 if (catView != null)
                 {
                     allCatViews.Add(catView);
@@ -1691,6 +1678,16 @@ public class BoardManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    private static CatView GetCatViewFromObject(GameObject catObj)
+    {
+        if (catObj == null)
+            return null;
+        CatView catView = catObj.GetComponent<CatView>();
+        if (catView == null)
+            catView = catObj.GetComponentInChildren<CatView>();
+        return catView;
     }
 
     /// <summary>

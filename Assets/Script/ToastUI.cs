@@ -4,6 +4,7 @@ using DG.Tweening;
 using System.Collections;
 using TMPro;
 
+// Lightweight floating toast controller.
 public class ToastUI : MonoBehaviour
 {
     [Header("UI References")]
@@ -25,27 +26,33 @@ public class ToastUI : MonoBehaviour
 
     private void Awake()
     {
-        // Get or add required components
+        EnsureComponents();
+        CacheDefaults();
+        ApplyHiddenState();
+        AutoAssignReferences();
+    }
+
+    private void EnsureComponents()
+    {
         rectTransform = GetComponent<RectTransform>();
         if (rectTransform == null)
-        {
             rectTransform = gameObject.AddComponent<RectTransform>();
-        }
 
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null)
-        {
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        }
+    }
 
-        // Store original values
-        if (rectTransform != null)
-        {
-            originalScale = rectTransform.localScale;
-            originalPosition = rectTransform.anchoredPosition;
-        }
+    private void CacheDefaults()
+    {
+        if (rectTransform == null)
+            return;
+        originalScale = rectTransform.localScale;
+        originalPosition = rectTransform.anchoredPosition;
+    }
 
-        // Initialize hidden state
+    private void ApplyHiddenState()
+    {
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 0f;
@@ -54,12 +61,7 @@ public class ToastUI : MonoBehaviour
         }
 
         if (rectTransform != null)
-        {
             rectTransform.localScale = Vector3.zero;
-        }
-
-        // Auto assign references
-        AutoAssignReferences();
     }
 
     /// <summary>
@@ -93,19 +95,21 @@ public class ToastUI : MonoBehaviour
     /// <param name="autoHide">Whether to automatically hide after displayDuration</param>
     public void Show(string message, bool autoHide = true)
     {
-        // Stop any existing animation
         KillCurrentTween();
 
-        // Set message text
         if (messageText != null)
-        {
             messageText.text = message;
-        }
 
-        // Activate game object
         gameObject.SetActive(true);
+        PrepareShowState();
+        PlayShowAnimation();
 
-        // Reset to initial hidden state
+        if (autoHide)
+            RestartAutoHideCoroutine();
+    }
+
+    private void PrepareShowState()
+    {
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 0f;
@@ -114,30 +118,23 @@ public class ToastUI : MonoBehaviour
         }
 
         if (rectTransform != null)
-        {
             rectTransform.localScale = Vector3.zero;
-        }
+    }
 
-        // Animate show
+    private void PlayShowAnimation()
+    {
         if (canvasGroup != null)
-        {
             canvasGroup.DOFade(1f, showDuration).SetEase(showEase);
-        }
 
         if (rectTransform != null)
-        {
             rectTransform.DOScale(originalScale, showDuration).SetEase(showEase);
-        }
+    }
 
-        // Auto hide after display duration
-        if (autoHide)
-        {
-            if (autoHideCoroutine != null)
-            {
-                StopCoroutine(autoHideCoroutine);
-            }
-            autoHideCoroutine = StartCoroutine(AutoHideCoroutine());
-        }
+    private void RestartAutoHideCoroutine()
+    {
+        if (autoHideCoroutine != null)
+            StopCoroutine(autoHideCoroutine);
+        autoHideCoroutine = StartCoroutine(AutoHideCoroutine());
     }
 
     /// <summary>
@@ -145,21 +142,15 @@ public class ToastUI : MonoBehaviour
     /// </summary>
     public void Hide()
     {
-        // Stop auto hide coroutine
         if (autoHideCoroutine != null)
         {
             StopCoroutine(autoHideCoroutine);
             autoHideCoroutine = null;
         }
 
-        // Stop any existing animation
         KillCurrentTween();
-
-        // Animate hide
         if (canvasGroup != null)
-        {
             canvasGroup.DOFade(0f, hideDuration).SetEase(hideEase);
-        }
 
         if (rectTransform != null)
         {
@@ -177,7 +168,6 @@ public class ToastUI : MonoBehaviour
         }
         else
         {
-            // If no rectTransform, just deactivate after fade
             if (canvasGroup != null)
             {
                 canvasGroup.DOFade(0f, hideDuration).SetEase(hideEase)
@@ -206,30 +196,22 @@ public class ToastUI : MonoBehaviour
     private void KillCurrentTween()
     {
         if (currentTween != null && currentTween.IsActive())
-        {
             currentTween.Kill();
-        }
+        currentTween = null;
 
         if (canvasGroup != null)
-        {
             DOTween.Kill(canvasGroup);
-        }
 
         if (rectTransform != null)
-        {
             DOTween.Kill(rectTransform);
-        }
     }
 
     private void OnDestroy()
     {
-        // Kill all tweens on destroy
         KillCurrentTween();
 
         if (autoHideCoroutine != null)
-        {
             StopCoroutine(autoHideCoroutine);
-        }
     }
 
     // Public getters

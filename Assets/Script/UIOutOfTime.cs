@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// Popup shown when the level timer reaches 00:00 (out of time). Inherits from BasePopup.
-/// </summary>
 public class UIOutOfTime : BasePopup
 {
     [Header("OutOfTime UI")]
@@ -35,15 +32,13 @@ public class UIOutOfTime : BasePopup
     {
         SoundManager.Instance?.PlayButtonClick();
         Hide();
-        if (GameManager.Instance != null)
-            GameManager.Instance.ShowFailFromOutOfTime();
+        GameManager.Instance?.ShowFailFromOutOfTime();
     }
 
     protected virtual void HandleClaimClicked()
     {
         SoundManager.Instance?.PlayButtonClick();
-        if (GameManager.Instance != null)
-            GameManager.Instance.RequestOutOfTimeClaimReward();
+        GameManager.Instance?.RequestOutOfTimeClaimReward();
     }
 
     public virtual void SetTitle(string title)

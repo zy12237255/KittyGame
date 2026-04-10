@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -46,17 +43,19 @@ public class SoundManager : MonoBehaviour
 
     private const string KeyMusicVolume = "MusicVolume";
     private const string KeySFXVolume = "SFXVolume";
+    private const string KeyMusicEnabled = "MusicEnabled";
+    private const string KeySFXEnabled = "SFXEnabled";
+    private const string KeyVibrationEnabled = "VibrationEnabled";
 
     /// <summary>
     /// play sfx
     /// </summary>
     public void PlaySFX(AudioClip clip, float volume = 1f)
     {
-        if (clip != null && IsSFXEnabled())
-        {
-            float finalVolume = GetSFXVolume() * volume;
-            sfxSource.PlayOneShot(clip, finalVolume);
-        }
+        if (clip == null || !IsSFXEnabled())
+            return;
+        float finalVolume = GetSFXVolume() * volume;
+        sfxSource.PlayOneShot(clip, finalVolume);
     }
 
     /// <summary>
@@ -190,7 +189,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public bool IsMusicEnabled()
     {
-        return PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
+        return PlayerPrefs.GetInt(KeyMusicEnabled, 1) == 1;
     }
 
     /// <summary>
@@ -198,7 +197,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public bool IsSFXEnabled()
     {
-        return PlayerPrefs.GetInt("SFXEnabled", 1) == 1;
+        return PlayerPrefs.GetInt(KeySFXEnabled, 1) == 1;
     }
 
     /// <summary>
@@ -206,7 +205,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public bool IsVibrationEnabled()
     {
-        return PlayerPrefs.GetInt("VibrationEnabled", 1) == 1;
+        return PlayerPrefs.GetInt(KeyVibrationEnabled, 1) == 1;
     }
 
     /// <summary>
@@ -244,7 +243,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetMusicEnabled(bool isEnabled)
     {
-        PlayerPrefs.SetInt("MusicEnabled", isEnabled ? 1 : 0);
+        PlayerPrefs.SetInt(KeyMusicEnabled, isEnabled ? 1 : 0);
         PlayerPrefs.Save();
 
         if (musicSource != null)
@@ -257,7 +256,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetSFXEnabled(bool isEnabled)
     {
-        PlayerPrefs.SetInt("SFXEnabled", isEnabled ? 1 : 0);
+        PlayerPrefs.SetInt(KeySFXEnabled, isEnabled ? 1 : 0);
         PlayerPrefs.Save();
 
         if (sfxSource != null)
@@ -268,7 +267,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetVibrationEnabled(bool isEnabled)
     {
-        PlayerPrefs.SetInt("VibrationEnabled", isEnabled ? 1 : 0);
+        PlayerPrefs.SetInt(KeyVibrationEnabled, isEnabled ? 1 : 0);
         PlayerPrefs.Save();
 
         if (isEnabled)

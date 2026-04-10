@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// Setting popup with two modes: Pause (from in-game pause) and Setting (from Home screen).
-/// </summary>
 public class UISetting : BasePopup
 {
     public enum SettingMode
@@ -47,14 +44,10 @@ public class UISetting : BasePopup
 
     protected virtual void BindButtons()
     {
-        if (buttonClose != null)
-            buttonClose.onClick.AddListener(HandleCloseClicked);
-        if (buttonSupport != null)
-            buttonSupport.onClick.AddListener(HandleSupportClicked);
-        if (buttonRate != null)
-            buttonRate.onClick.AddListener(HandleRateClicked);
-        if (buttonReplay != null)
-            buttonReplay.onClick.AddListener(HandleReplayClicked);
+        buttonClose?.onClick.AddListener(HandleCloseClicked);
+        buttonSupport?.onClick.AddListener(HandleSupportClicked);
+        buttonRate?.onClick.AddListener(HandleRateClicked);
+        buttonReplay?.onClick.AddListener(HandleReplayClicked);
     }
 
     protected virtual void BindSliders()
@@ -83,21 +76,23 @@ public class UISetting : BasePopup
         SoundManager.Instance?.SetMusicVolume(value);
     }
 
-    /// <summary>
-    /// Show setting popup in the given mode. Pause: from in-game pause. Setting: from Home screen.
-    /// Loads saved SFX/Music volume into sliders.
-    /// </summary>
     public void Show(SettingMode mode)
     {
         _currentMode = mode;
-        if (textTitle != null)
-            textTitle.text = mode == SettingMode.Pause ? "Paused" : "Settings";
-        if (groupButtonsSetting != null)
-            groupButtonsSetting.gameObject.SetActive(mode == SettingMode.Setting);
-        if (groupButtonsPause != null)
-            groupButtonsPause.gameObject.SetActive(mode == SettingMode.Pause);
+        ApplyModeLayout(mode);
         LoadSliderValues();
         base.Show();
+    }
+
+    private void ApplyModeLayout(SettingMode mode)
+    {
+        bool isPause = mode == SettingMode.Pause;
+        if (textTitle != null)
+            textTitle.text = isPause ? "Paused" : "Settings";
+        if (groupButtonsSetting != null)
+            groupButtonsSetting.gameObject.SetActive(!isPause);
+        if (groupButtonsPause != null)
+            groupButtonsPause.gameObject.SetActive(isPause);
     }
 
     /// <summary>
@@ -105,11 +100,13 @@ public class UISetting : BasePopup
     /// </summary>
     protected virtual void LoadSliderValues()
     {
-        if (SoundManager.Instance == null) return;
+        SoundManager sm = SoundManager.Instance;
+        if (sm == null)
+            return;
         if (sliderSFX != null)
-            sliderSFX.SetValueWithoutNotify(SoundManager.Instance.GetSFXVolume());
+            sliderSFX.SetValueWithoutNotify(sm.GetSFXVolume());
         if (sliderMusic != null)
-            sliderMusic.SetValueWithoutNotify(SoundManager.Instance.GetMusicVolume());
+            sliderMusic.SetValueWithoutNotify(sm.GetMusicVolume());
     }
 
     public override void Show()
@@ -121,22 +118,20 @@ public class UISetting : BasePopup
     {
         SoundManager.Instance?.PlayButtonClick();
         Hide();
-        if (_currentMode == SettingMode.Pause && GameManager.Instance != null)
-            GameManager.Instance.ResumeGameFromPause();
+        if (_currentMode == SettingMode.Pause)
+            GameManager.Instance?.ResumeGameFromPause();
     }
 
     protected virtual void HandleSupportClicked()
     {
         SoundManager.Instance?.PlayButtonClick();
-        if (GameManager.Instance != null)
-            GameManager.Instance.OpenSupport();
+        GameManager.Instance?.OpenSupport();
     }
 
     protected virtual void HandleRateClicked()
     {
         SoundManager.Instance?.PlayButtonClick();
-        if (GameManager.Instance != null)
-            GameManager.Instance.OpenRate();
+        GameManager.Instance?.OpenRate();
     }
 
     protected virtual void HandleReplayClicked()
@@ -145,8 +140,7 @@ public class UISetting : BasePopup
         if (_currentMode != SettingMode.Pause)
             return;
         Hide();
-        if (GameManager.Instance != null)
-            GameManager.Instance.ShowLostEnergyFromPause();
+        GameManager.Instance?.ShowLostEnergyFromPause();
     }
 
     public void SetTitle(string title)

@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// Popup shown when the player fails a level. Inherits from BasePopup.
-/// </summary>
 public class UIFail : BasePopup
 {
     [Header("Fail UI")]
@@ -35,16 +32,14 @@ public class UIFail : BasePopup
     {
         SoundManager.Instance?.PlayButtonClick();
         Hide();
-        if (GameManager.Instance != null)
-            GameManager.Instance.ReturnToHomeFromFail();
+        GameManager.Instance?.ReturnToHomeFromFail();
     }
 
     protected virtual void HandleReplayClicked()
     {
         SoundManager.Instance?.PlayButtonClick();
         Hide();
-        if (GameManager.Instance != null)
-            GameManager.Instance.ReplayLevelFromFail();
+        GameManager.Instance?.ReplayLevelFromFail();
     }
 
     public virtual void SetTitle(string title)
